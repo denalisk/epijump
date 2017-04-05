@@ -9,7 +9,7 @@ export class Player extends GameObject {
   public color: string = "blue";
   public timer: number = 0;
   public velocityVector: number = 1;
-  public gravity: number = 1.02; //1.05
+  public gravity: number = .5; //1.05
   public speed: number = 18;
   constructor(public name: string) {
     super();
@@ -17,10 +17,23 @@ export class Player extends GameObject {
 
   applyGravity(){
     this.yCoord += this.velocityVector;
-    this.velocityVector = this.velocityVector*this.gravity;
+    this.velocityVector += this.gravity;
+  }
+
+  deathCheck(){
+    if(this.yCoord > 150) {
+      this.yCoord = 0;
+      this.velocityVector = 1;
+      return true;
+    }
   }
 
   move(movement: number) {
     this.xCoord += movement*this.speed;
   }
+
+  bounce(){
+    this.velocityVector = -6;
+  }
+
 }

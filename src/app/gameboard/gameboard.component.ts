@@ -46,7 +46,25 @@ export class GameboardComponent implements OnInit {
     this.objectArray.push(newGameObject);
     if(this.objectArray.length > 6) {
       this.objectArray.shift();
-      console.log(this.objectArray);
+    }
+  }
+
+  checkCollisions() {
+    for (let item of this.objectArray) {
+      if( item.xCoord < this.newPlayer.xCoord + this.newPlayer.xDimension &&
+          item.xCoord + item.xDimension > this.newPlayer.xCoord &&
+          item.yCoord < this.newPlayer.yCoord + this.newPlayer.yDimension &&
+          item.yDimension + item.yCoord > this.newPlayer.yCoord) {
+            console.log("Collisions!")
+            this.newPlayer.bounce();
+          }
+    }
+
+    if(this.newPlayer.xCoord > 300) {
+      this.newPlayer.xCoord = 0;
+    }
+    if(this.newPlayer.xCoord < 0) {
+      this.newPlayer.xCoord = 300;
     }
   }
 
@@ -54,13 +72,11 @@ export class GameboardComponent implements OnInit {
   gameLoop() {
     var current = this;
     var counter = 0;
-    setInterval(function(){
+    var gameTick = setInterval(function(){
       //KEY PRESS
       document.onkeydown = checkKey;
       function checkKey(e) {
-
           e = e || window.event;
-
           if (e.keyCode == '37') {
             //left arrow
              current.newPlayer.move(-1);
@@ -72,15 +88,19 @@ export class GameboardComponent implements OnInit {
       }
       //////////
 
-      if(counter % 90 === 0) {
+      if(counter % 30 === 0) {
         current.generateObject();
       }
       current.ctx.clearRect(0, 0, current.canvas.width, current.canvas.height);
       current.placeObject(current.newPlayer);
       current.updateObjects();
+      current.checkCollisions()
       counter++;
+      if(current.newPlayer.deathCheck()) {
+        console.log('Game Over');
+        // clearInterval(gameTick);
+      }
+
     }, 30);
   }
-
-
 }
