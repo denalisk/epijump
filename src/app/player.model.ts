@@ -10,7 +10,7 @@ export class Player extends GameObject {
   public timer: number = 0;
   public velocityVector: number = 1;
   public gravity: number = .5; //1.05
-  public speed: number = 18;
+  public speed: number = 8;
   constructor(public name: string) {
     super();
   }

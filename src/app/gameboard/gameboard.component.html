@@ -4,6 +4,10 @@
     <canvas id="gameBase"></canvas>
   </div>
   <div class="col-xs-3">
+    <div class="jumbotron">
+      <h3>You current score:</h3>
+      <h1 [innerHTML]='newPlayer.score'></h1>
+    </div>
     <div class="row">
       <div class="well col-xs-6">
         <ul> High Scores:
@@ -20,11 +24,7 @@
         </ul>
       </div>
     </div>
-    <div class="jumbotron">
-      <h3>You current score:</h3>
-      <h1 [innerHTML]='newPlayer.score'></h1>
-    </div>
-    <!-- <ul> High Scores!
+        <!-- <ul> High Scores!
       <li *ngFor="let item of gameBoard.highScores">
         {{item}}
       </li>

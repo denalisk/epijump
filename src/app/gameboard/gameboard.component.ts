@@ -14,6 +14,10 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
   providers: [ScoreService]
 })
 export class GameboardComponent implements OnInit {
+  // Check for key Inputfunction
+  keyState = {};
+
+
   @Input() newPlayer: Player;
   scores: FirebaseListObservable<any[]>;
   gameBoard: Game = null;
@@ -30,6 +34,16 @@ export class GameboardComponent implements OnInit {
     this.gameBoard = newGame;
     this.canvas = document.getElementById("gameBase");
     this.ctx = this.canvas.getContext("2d");
+
+    /// Event Listeners
+    window.addEventListener('keydown',(e) => {
+        this.keyState[e.keyCode || e.which] = true;
+    },true);
+    window.addEventListener('keyup', (e) => {
+        this.keyState[e.keyCode || e.which] = false;
+    },true);
+
+    ///
     this.gameLoop();
   }
 
@@ -57,13 +71,15 @@ export class GameboardComponent implements OnInit {
     }
   }
 
+
+
+
   checkCollisions() {
     for (let item of this.objectArray) {
       if( item.xCoord < this.newPlayer.xCoord + this.newPlayer.xDimension &&
           item.xCoord + item.xDimension > this.newPlayer.xCoord &&
           item.yCoord < this.newPlayer.yCoord + this.newPlayer.yDimension &&
           item.yDimension + item.yCoord > this.newPlayer.yCoord) {
-            console.log("Collisions!")
             this.newPlayer.bounce();
           }
     }
@@ -81,20 +97,14 @@ export class GameboardComponent implements OnInit {
     var current = this;
     var counter = 0;
     var gameTick = setInterval(function(){
-      //KEY PRESS
-      document.onkeydown = checkKey;
-      function checkKey(e) {
-          e = e || window.event;
-          if (e.keyCode == '37') {
-            //left arrow
-             current.newPlayer.move(-1);
-          }
-          else if (e.keyCode == '39') {
-             // right arrow
-             current.newPlayer.move(1);
-          }
+
+      if (current.keyState[37] || current.keyState[65]){
+        current.newPlayer.move(-1);
       }
-      //////////
+      if (current.keyState[39] || current.keyState[68]){
+          current.newPlayer.move(1);
+      }
+
 
       if(counter % 30 === 0) {
         current.generateObject();
