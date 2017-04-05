@@ -20,6 +20,7 @@ export class GameboardComponent implements OnInit {
   canvas = null;
   ctx = null;
   objectArray: GameObject[] = [];
+  recentScores: Score[] = [];
 
   constructor(private scoreService: ScoreService) { }
 
@@ -105,10 +106,13 @@ export class GameboardComponent implements OnInit {
       counter++;
       current.newPlayer.score += 1;
       if(current.newPlayer.deathCheck()) {
-        console.log('Game Over');
-        console.log(current.newPlayer.score)
+        let newScore = new Score(current.newPlayer.name, current.newPlayer.score);
+        if(current.recentScores.length > 10) {
+            current.recentScores.pop();
+          }
+          current.recentScores.unshift(newScore);
         if(current.newPlayer.score > 300) {
-          current.scoreService.addScore(new Score(current.newPlayer.name, current.newPlayer.score));
+          current.scoreService.addScore(newScore);
         }
         current.newPlayer.score = 0;
         // clearInterval(gameTick);

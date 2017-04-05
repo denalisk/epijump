@@ -4,11 +4,26 @@
     <canvas id="gameBase"></canvas>
   </div>
   <div class="col-xs-3">
-    <ul> Recent Scores:
-      <li *ngFor="let item of scores | async">
-        {{item.name}} // {{item.score}}
-      </li>
-    </ul>
+    <div class="row">
+      <div class="well col-xs-6">
+        <ul> High Scores:
+          <li *ngFor="let item of scores | async">
+            {{item.name}} // {{item.score}}
+          </li>
+        </ul>
+      </div>
+      <div class="col-xs-6">
+        <ul> Your Recent Scores:
+          <li *ngFor="let item of recentScores">
+            {{item.score}}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="jumbotron">
+      <h3>You current score:</h3>
+      <h1 [innerHTML]='newPlayer.score'></h1>
+    </div>
     <!-- <ul> High Scores!
       <li *ngFor="let item of gameBoard.highScores">
         {{item}}
