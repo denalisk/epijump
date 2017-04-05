@@ -1,21 +1,36 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Player } from '../player.model';
 import { Game } from '../game.model';
+import { Score } from '../score.model';
 import { GameObject } from '../game-object.model';
+import { ScoreService } from '../score.service';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+
 
 @Component({
   selector: 'app-gameboard',
   templateUrl: './gameboard.component.html',
-  styleUrls: ['./gameboard.component.css']
+  styleUrls: ['./gameboard.component.css'],
+  providers: [ScoreService]
 })
 export class GameboardComponent implements OnInit {
   @Input() newPlayer: Player;
+  scores: FirebaseListObservable<any[]>;
   gameBoard: Game = null;
   canvas = null;
   ctx = null;
   objectArray: GameObject[] = [];
 
-  constructor() { }
+  constructor(private scoreService: ScoreService) { }
+
+  ngOnInit() {
+    this.scores = this.scoreService.getScores();
+    var newGame = new Game(this.newPlayer);
+    this.gameBoard = newGame;
+    this.canvas = document.getElementById("gameBase");
+    this.ctx = this.canvas.getContext("2d");
+    this.gameLoop();
+  }
 
   placeObject(gameObject: GameObject) {
     this.ctx.beginPath();
@@ -31,14 +46,6 @@ export class GameboardComponent implements OnInit {
       item.move(0, 1);
       this.placeObject(item);
     }
-  }
-
-  ngOnInit() {
-    var newGame = new Game(this.newPlayer);
-    this.gameBoard = newGame;
-    this.canvas = document.getElementById("gameBase");
-    this.ctx = this.canvas.getContext("2d");
-    this.gameLoop();
   }
 
   generateObject() {
@@ -100,7 +107,9 @@ export class GameboardComponent implements OnInit {
       if(current.newPlayer.deathCheck()) {
         console.log('Game Over');
         console.log(current.newPlayer.score)
-        current.gameBoard.addToScores(current.newPlayer.score);
+        if(current.newPlayer.score > 300) {
+          current.scoreService.addScore(new Score(current.newPlayer.name, current.newPlayer.score));
+        }
         current.newPlayer.score = 0;
         // clearInterval(gameTick);
       }

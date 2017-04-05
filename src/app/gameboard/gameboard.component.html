@@ -5,14 +5,14 @@
   </div>
   <div class="col-xs-3">
     <ul> Recent Scores:
-      <li *ngFor="let item of gameBoard.recentScores">
-        {{item}}
+      <li *ngFor="let item of scores | async">
+        {{item.name}} // {{item.score}}
       </li>
     </ul>
-    <ul> High Scores!
+    <!-- <ul> High Scores!
       <li *ngFor="let item of gameBoard.highScores">
         {{item}}
       </li>
-    </ul>
+    </ul> -->
   </div>
 </div>
