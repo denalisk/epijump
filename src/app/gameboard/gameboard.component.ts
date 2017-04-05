@@ -96,11 +96,14 @@ export class GameboardComponent implements OnInit {
       current.updateObjects();
       current.checkCollisions()
       counter++;
+      current.newPlayer.score += 1;
       if(current.newPlayer.deathCheck()) {
         console.log('Game Over');
+        console.log(current.newPlayer.score)
+        current.gameBoard.addToScores(current.newPlayer.score);
+        current.newPlayer.score = 0;
         // clearInterval(gameTick);
       }
-
     }, 30);
   }
 }

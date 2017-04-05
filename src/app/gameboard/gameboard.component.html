@@ -1,2 +1,18 @@
 <p>Player Name: {{newPlayer.name}}</p>
-<canvas id="gameBase"></canvas>
+<div class="row">
+  <div class="col-xs-9">
+    <canvas id="gameBase"></canvas>
+  </div>
+  <div class="col-xs-3">
+    <ul> Recent Scores:
+      <li *ngFor="let item of gameBoard.recentScores">
+        {{item}}
+      </li>
+    </ul>
+    <ul> High Scores!
+      <li *ngFor="let item of gameBoard.highScores">
+        {{item}}
+      </li>
+    </ul>
+  </div>
+</div>

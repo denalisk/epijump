@@ -1,13 +1,15 @@
-<h1>
-  {{title}}
-</h1>
-<div class="player-input" *ngIf="!newPlayer">
-  <form>
-    <input placeholder="Enter name" #newPlayerName>
-    <button (click)="createPlayer(newPlayerName.value)">Play!</button>
-  </form>
-</div>
+<div class="container-fluid">
+  <h1>
+    {{title}}
+  </h1>
+  <div class="player-input" *ngIf="!newPlayer">
+    <form>
+      <input placeholder="Enter name" #newPlayerName>
+      <button (click)="createPlayer(newPlayerName.value)">Play!</button>
+    </form>
+  </div>
 
-<div class="gameboard" *ngIf="newPlayer">
-  <app-gameboard [newPlayer]="newPlayer">Loading...</app-gameboard>
+  <div class="gameboard" *ngIf="newPlayer">
+    <app-gameboard [newPlayer]="newPlayer">Loading...</app-gameboard>
+  </div>
 </div>

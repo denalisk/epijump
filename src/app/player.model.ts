@@ -33,6 +33,7 @@ export class Player extends GameObject {
   }
 
   bounce(){
+    this.score += 5;
     this.velocityVector = -6;
   }
 
