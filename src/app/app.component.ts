@@ -8,7 +8,7 @@ import { Player } from './player.model';
 })
 export class AppComponent {
   title = 'EpiJump';
-  newPlayer = new Player("Dude");
+  newPlayer = null;
   createPlayer(name: string) {
     var newPlayer = new Player(name);
     this.newPlayer = newPlayer;
