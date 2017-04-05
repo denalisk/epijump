@@ -19,13 +19,14 @@ export class GameboardComponent implements OnInit {
 
   placeObject(gameObject: GameObject) {
     this.ctx.beginPath();
-    this.ctx.rect(gameObject.xCoord, gameObject.yCoord, gameObject.yDimension, gameObject.xDimension);
-    this.ctx.fillStyle = "#FF0000";
+    this.ctx.rect(gameObject.xCoord, gameObject.yCoord, gameObject.xDimension, gameObject.yDimension);
+    this.ctx.fillStyle = gameObject.color;
     this.ctx.fill();
     this.ctx.closePath();
   }
 
   updateObjects() {
+    this.newPlayer.applyGravity();
     for(let item of this.objectArray) {
       item.move(0, 1);
       this.placeObject(item);
@@ -58,6 +59,7 @@ export class GameboardComponent implements OnInit {
         current.generateObject();
       }
       current.ctx.clearRect(0, 0, current.canvas.width, current.canvas.height);
+      current.placeObject(current.newPlayer);
       current.updateObjects();
       counter++;
     }, 30);
