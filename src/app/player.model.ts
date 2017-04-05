@@ -8,15 +8,19 @@ export class Player extends GameObject {
   public yDimension: number = 5;
   public color: string = "blue";
   public timer: number = 0;
-  public velocityVector: number[] = [0,1];
-  public gravity: number = 1.05;
+  public velocityVector: number = 1;
+  public gravity: number = 1.02; //1.05
+  public speed: number = 18;
   constructor(public name: string) {
     super();
   }
 
   applyGravity(){
-    this.xCoord += this.velocityVector[0];
-    this.yCoord += this.velocityVector[1];
-    this.velocityVector = [this.velocityVector[0]*this.gravity, this.velocityVector[1]*this.gravity];
+    this.yCoord += this.velocityVector;
+    this.velocityVector = this.velocityVector*this.gravity;
+  }
+
+  move(movement: number) {
+    this.xCoord += movement*this.speed;
   }
 }

@@ -55,7 +55,24 @@ export class GameboardComponent implements OnInit {
     var current = this;
     var counter = 0;
     setInterval(function(){
-      if(counter % 30 === 0) {
+      //KEY PRESS
+      document.onkeydown = checkKey;
+      function checkKey(e) {
+
+          e = e || window.event;
+
+          if (e.keyCode == '37') {
+            //left arrow
+             current.newPlayer.move(-1);
+          }
+          else if (e.keyCode == '39') {
+             // right arrow
+             current.newPlayer.move(1);
+          }
+      }
+      //////////
+
+      if(counter % 90 === 0) {
         current.generateObject();
       }
       current.ctx.clearRect(0, 0, current.canvas.width, current.canvas.height);
