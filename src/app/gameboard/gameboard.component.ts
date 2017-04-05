@@ -13,7 +13,7 @@ export class GameboardComponent implements OnInit {
   gameBoard: Game = null;
   canvas = null;
   ctx = null;
-  dummyObject: GameObject = new GameObject('Dummy');
+  objectArray: GameObject[] = [];
 
   constructor() { }
 
@@ -25,24 +25,42 @@ export class GameboardComponent implements OnInit {
     this.ctx.closePath();
   }
 
+  updateObjects() {
+    for(let item of this.objectArray) {
+      item.move(0, 1);
+      this.placeObject(item);
+    }
+  }
+
   ngOnInit() {
     var newGame = new Game(this.newPlayer);
     this.gameBoard = newGame;
     this.canvas = document.getElementById("gameBase");
     this.ctx = this.canvas.getContext("2d");
-    this.placeObject(this.dummyObject);
     this.gameLoop();
   }
 
+  generateObject() {
+    var newGameObject = new GameObject();
+    this.objectArray.push(newGameObject);
+    if(this.objectArray.length > 6) {
+      this.objectArray.shift();
+      console.log(this.objectArray);
+    }
+  }
 
   //Update Loop
   gameLoop() {
     var current = this;
+    var counter = 0;
     setInterval(function(){
+      if(counter % 30 === 0) {
+        current.generateObject();
+      }
       current.ctx.clearRect(0, 0, current.canvas.width, current.canvas.height);
-      current.dummyObject.move(0,2);
-      current.placeObject(current.dummyObject);
-    }, 200);
+      current.updateObjects();
+      counter++;
+    }, 30);
   }
 
 

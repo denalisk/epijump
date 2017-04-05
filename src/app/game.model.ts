@@ -4,7 +4,7 @@ import { GameObject } from './game-object.model';
 export class Game {
   public xDimension: number = 700;
   public yDimension: number = 900;
-  public objectArray: GameObject = new GameObject('Platform');
+  public objectArray: GameObject = new GameObject();
 
   constructor(public player: Player) { }
 
