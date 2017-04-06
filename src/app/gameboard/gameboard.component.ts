@@ -58,7 +58,11 @@ export class GameboardComponent implements OnInit {
   updateObjects() {
     this.newPlayer.applyGravity();
     for(let item of this.objectArray) {
-      item.move(0, 1);
+      if (item.mover[0]) {
+        item.move(item.mover[1],1);
+      } else {
+        item.move(0, 1);
+      }
       this.placeObject(item);
     }
   }
@@ -80,7 +84,7 @@ export class GameboardComponent implements OnInit {
           item.xCoord + item.xDimension > this.newPlayer.xCoord &&
           item.yCoord < this.newPlayer.yCoord + this.newPlayer.yDimension &&
           item.yDimension + item.yCoord > this.newPlayer.yCoord) {
-            this.newPlayer.bounce();
+            this.newPlayer.bounce(GameObject.counter);
           }
     }
 
@@ -116,6 +120,7 @@ export class GameboardComponent implements OnInit {
       counter++;
       current.newPlayer.score += 1;
       if(current.newPlayer.deathCheck()) {
+        GameObject.cleanUp();
         let newScore = new Score(current.newPlayer.name, current.newPlayer.score);
         if(current.recentScores.length > 10) {
             current.recentScores.pop();

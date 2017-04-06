@@ -32,8 +32,8 @@ export class Player extends GameObject {
     this.xCoord += movement*this.speed;
   }
 
-  bounce(){
-    this.score += 5;
+  bounce(counter:number){
+    this.score += counter;
     this.velocityVector = -6;
   }
 
