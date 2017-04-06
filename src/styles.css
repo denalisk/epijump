@@ -28,6 +28,7 @@ h1 {
 }
 
 .player-input button, .player-input input {
+  margin-top: 2%;
   color: black;
   font-size: 20px;
   height: 50px;
@@ -40,4 +41,12 @@ h1 {
 
 .player-input h1 {
   font-size: 70px;
+}
+
+.instruction-info {
+  margin: 5% 20% 0 0;
+}
+
+.instruction-info p {
+  font-size: 16px;
 }

@@ -8,6 +8,11 @@
       <input placeholder="Enter name" #newPlayerName>
       <button (click)="createPlayer(newPlayerName.value)">Play!</button>
     </form>
+    <div class="instruction-info">
+      <h2>Instructions</h2>
+      <p>Use your left and right arrow keys to control the square. Land on the platforms to keep yourself alive. If you fall, your score will reset. Be ready! The game starts immediately.</p>
+      <p>This project was created at the Epicodus code school in Seattle, WA by Sam Kirsch, and Lawrence Eby.</p>
+    </div>
   </div>
 
   <div class="gameboard" *ngIf="newPlayer">
