@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Score } from './score.model';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import "rxjs/add/operator/map";
 
 @Injectable()
 export class ScoreService {
-  // scores: FirebaseListObservable<any[]>;
 
   scores: FirebaseListObservable<any[]>;
-  // highScores: Score[] = [new Score('Jim from Accounting', 1000), new Score('Jim from Accounting', 900), new Score('Jim from Accounting', 800), new Score('Jim from Accounting', 700), new Score('Jim from Accounting', 600), new Score('Jim from Accounting', 500), new Score('Jim from Accounting', 400), new Score('Jim from Accounting', 300), new Score('Jim from Accounting', 200), new Score('Jim from Accounting', 24)];
+
 
   constructor(private angularFire: AngularFire) {
-    this.scores = angularFire.database.list('scores');
+    this.scores = angularFire.database.list('scores', {
+      query: {
+        orderByChild: "score",
+        limitToLast: 10
+      }
+    }).map((array) => array.reverse()) as FirebaseListObservable<any[]>;
   }
 
   getScores() {

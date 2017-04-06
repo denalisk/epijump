@@ -9,6 +9,7 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { GameboardComponent } from './gameboard/gameboard.component';
 
 import { masterFirebaseConfig } from './api-keys';
+import { HighScorePipe } from './high-score.pipe';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -21,7 +22,8 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     ScoreboardComponent,
-    GameboardComponent
+    GameboardComponent,
+    HighScorePipe
   ],
   imports: [
     BrowserModule,
