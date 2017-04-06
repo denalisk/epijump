@@ -5,7 +5,7 @@ export class GameObject {
   public yDimension: number = 5;
   public yCoord: number = 0;
   public xCoord: number = this.getX();
-  public color: string = "#FF0000";
+  public color: string = "black";
   public mover: any[] = [false, 1];
 
   constructor() {

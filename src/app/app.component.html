@@ -1,8 +1,9 @@
 <div class="container-fluid">
-  <h1>
-    {{title}}
-  </h1>
+
   <div class="player-input" *ngIf="!newPlayer">
+    <h1>
+      {{title}}
+    </h1>
     <form>
       <input placeholder="Enter name" #newPlayerName>
       <button (click)="createPlayer(newPlayerName.value)">Play!</button>
@@ -10,6 +11,9 @@
   </div>
 
   <div class="gameboard" *ngIf="newPlayer">
+    <h1>
+      {{title}}
+    </h1>
     <app-gameboard [newPlayer]="newPlayer">Loading...</app-gameboard>
   </div>
 </div>

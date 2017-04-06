@@ -6,7 +6,7 @@ export class Player extends GameObject {
   public yCoord: number = 0;
   public xDimension: number = 15;
   public yDimension: number = 5;
-  public color: string = "blue";
+  public color: string = "#820e21";
   public timer: number = 0;
   public velocityVector: number = 1;
   public gravity: number = .5; //1.05

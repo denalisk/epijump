@@ -76,8 +76,6 @@ export class GameboardComponent implements OnInit {
   }
 
 
-
-
   checkCollisions() {
     for (let item of this.objectArray) {
       if( item.xCoord < this.newPlayer.xCoord + this.newPlayer.xDimension &&
@@ -88,11 +86,11 @@ export class GameboardComponent implements OnInit {
           }
     }
 
-    if(this.newPlayer.xCoord > 300) {
+    if(this.newPlayer.xCoord > 290) {
       this.newPlayer.xCoord = 0;
     }
     if(this.newPlayer.xCoord < 0) {
-      this.newPlayer.xCoord = 300;
+      this.newPlayer.xCoord = 290;
     }
   }
 

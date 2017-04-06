@@ -1,6 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister');
+
+body {
+  background-color: #4d294f !important;
+  color: white !important;
+  font-family: 'Love Ya Like A Sister', cursive !important;
+}
+
+.jumbotron, .well {
+  background-color: #4d294f !important;
+}
+
+h1 {
+  font-family: 'Love Ya Like A Sister', cursive !important;
+}
+
 #gameBase {
   height: 600px;
   width: 500px;
-  background-color: #ecf4a1;
+  background-color: #f9dacc;
+  border: 2px solid white;
+}
+
+
+.player-input {
+  margin: 30% 0 0 20%;
+}
+
+.player-input button, .player-input input {
+  color: black;
+  font-size: 20px;
+  height: 50px;
+}
+
+.player-input input {
+  width: 30%;
+  min-width: 200px;
+}
+
+.player-input h1 {
+  font-size: 70px;
 }
